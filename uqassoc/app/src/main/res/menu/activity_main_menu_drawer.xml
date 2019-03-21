@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:icon="@drawable/ic_search_black_24dp"
+            android:id="@+id/app_bar_search"
+            app:actionViewClass="android.widget.SearchView"
+            android:title=" "
+           />
+        <item
+            android:id="@+id/activity_main_drawer_home"
+            android:icon="@drawable/ic_stat_home"
+            android:title="HOME" />
+    </group>
+    <item android:title="Recherches">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/activity_main_drawer_assoc"
+                    android:icon="@drawable/ic_stat_info"
+                    android:title="Associations" />
+                <item
+                    android:id="@+id/activity_main_drawer_mageuqac"
+                    android:icon="@drawable/ic_stat_info"
+                    android:title="MAGEUQAC" />
+            </group>
+        </menu>
+    </item>
+    <item android:title="">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/activity_main_drawer_liens"
+                    android:icon="@drawable/ic_stat_info"
+                    android:title="Liens utiles" />
+                <item
+                    android:id="@+id/activity_main_drawer_contact"
+                    android:icon="@drawable/ic_stat_info"
+                    android:title="Contactez-nous" />
+            </group>
+        </menu>
+    </item>
+</menu>

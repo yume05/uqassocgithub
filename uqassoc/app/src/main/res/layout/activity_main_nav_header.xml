@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="176dip"
+    android:background="@color/colorUQAC"
+    android:gravity="center"
+    android:layout_marginTop="15dp"
+    android:orientation="vertical">
+
+
+    <ImageButton
+        android:id="@+id/imageLogIn"
+        android:layout_width="159dp"
+        android:layout_height="131dp"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:contentDescription="TODO"
+        android:cropToPadding="true"
+        android:scaleType="fitCenter"
+        android:pointerIcon="none"
+        android:clickable="true"
+
+        app:srcCompat="@drawable/ic_stat_name" />
+
+</LinearLayout>
