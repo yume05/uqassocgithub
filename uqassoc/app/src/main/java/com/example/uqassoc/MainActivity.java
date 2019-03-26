@@ -1,9 +1,6 @@
 package com.example.uqassoc;
 
-
-import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,16 +8,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
+
 import android.view.MenuItem;
 
 import android.view.View;
 
 import android.widget.AdapterView;
+
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 
-import android.widget.ListAdapter;
+
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.uqassoc.models.Events;
@@ -31,10 +31,12 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     //FOR DESIGN
+
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     public NavigationView navigationView;
-    public DrawerLayout buttonLogIn;
+    public ImageButton buttonLogIn;
+    public TextView buttonHome;
     private GridView gridViewEvents;
     EventsAdapter adapter;
     ArrayList<Events> events = new ArrayList<Events>();
@@ -46,20 +48,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
-
         //events
         popularGridView();
         //Bouton Log in
         navigationView = (NavigationView) findViewById(R.id.activity_main_nav_view);
         View hView =  navigationView.getHeaderView(0);
-        ImageButton buttonLogIn = (ImageButton)hView.findViewById(R.id.imageLogIn);
 
-        buttonLogIn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast toast = Toast.makeText(MainActivity.this, "Ceci est un toast qui s'affiche à l'écran !", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        });
         // 6 - Configure all views
 
         this.configureToolBar();
@@ -68,7 +62,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         this.configureNavigationView();
 
-        //Image Logo oconnexion
+        //Open CONNEXION
+        buttonLogIn = (ImageButton)hView.findViewById(R.id.imageLogIn);
+
+        buttonLogIn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LogInActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //Open HOME
+        buttonHome = (TextView)findViewById(R.id.activity_main_drawer_home);
+
+        buttonHome.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
 
     }
 
