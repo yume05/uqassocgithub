@@ -26,21 +26,46 @@
             android:scaleType="fitXY"
             tools:srcCompat="@tools:sample/avatars[1]" />
 
-        <TextView
-            android:id="@+id/textViewEvent"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageViewEvent"
-            android:layout_marginLeft="20dp"
+            android:orientation="horizontal">
 
-            android:layout_marginRight="20dp"
+            <TextView
+                android:id="@+id/textViewEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageViewEvent"
+                android:layout_marginLeft="20dp"
 
-            android:fontFamily="sans-serif-light"
+                android:layout_marginRight="20dp"
 
-            android:text="Event name"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"
-            android:typeface="normal" />
+                android:fontFamily="sans-serif-light"
+
+                android:text="Event name"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:typeface="normal" />
+
+            <TextView
+                android:id="@+id/idViewEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageViewEvent"
+                android:layout_marginLeft="20dp"
+
+                android:layout_marginRight="20dp"
+
+                android:fontFamily="sans-serif-light"
+
+                android:text="Event name"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="1sp"
+                android:typeface="normal"
+                android:visibility="invisible" />
+        </LinearLayout>
+
     </LinearLayout>
 </RelativeLayout>

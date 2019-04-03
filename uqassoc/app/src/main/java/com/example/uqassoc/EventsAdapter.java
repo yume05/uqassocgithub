@@ -23,6 +23,7 @@ public class EventsAdapter extends BaseAdapter{
     public EventsAdapter(Context context, ArrayList<Events> events) {
         this.context = context;
         this.events = events;
+
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -50,11 +51,17 @@ public class EventsAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
        View itemView = convertView;
        itemView = (itemView == null) ? inflater.inflate(R.layout.grid_item, null): itemView;
+
         ImageView imageViewEventName = (ImageView) itemView.findViewById(R.id.imageViewEvent);
         TextView textViewEvent= (TextView) itemView.findViewById(R.id.textViewEvent);
+        TextView idViewEvent= (TextView) itemView.findViewById(R.id.idViewEvent);
+
         Events selectedEvent = events.get(position);
-        imageViewEventName.setImageResource(selectedEvent.imageId);
-        textViewEvent.setText(selectedEvent.name);
+
+        imageViewEventName.setImageResource(selectedEvent.image);
+        textViewEvent.setText(selectedEvent.title);
+        idViewEvent.setText(selectedEvent.id);
+
         return itemView;
     }
 

@@ -9,23 +9,29 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import android.util.Log;
 import android.view.MenuItem;
 
 import android.view.View;
 
 import android.widget.AdapterView;
 
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 
 
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.uqassoc.models.Events;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,9 +43,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public NavigationView navigationView;
     public ImageButton buttonLogIn;
     public TextView buttonHome;
-    private GridView gridViewEvents;
+    public TextView textTitle;
+    private GridView gridViewEvents = null;
     EventsAdapter adapter;
-    ArrayList<Events> events = new ArrayList<Events>();
+    ArrayList<Events> eventsList = new ArrayList<Events>();
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,19 +58,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //events
         popularGridView();
+
+        onCreateDrawer();
+
+
+//        this.listView = (ListView) findViewById(R.id.listView);
+//        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
+//        databaseAccess.open();
+//        eventsList = databaseAccess.getEvents();
+//        databaseAccess.close();
+//
+//       // ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, eventsList);
+//        adapter = new EventsAdapter(this, eventsList);
+//        this.listView.setAdapter(adapter);
+        // 6 - Configure all views
+
+
+//
+        //Open CONNEXION
         //Bouton Log in
         navigationView = (NavigationView) findViewById(R.id.activity_main_nav_view);
         View hView =  navigationView.getHeaderView(0);
-
-        // 6 - Configure all views
-
-        this.configureToolBar();
-
-        this.configureDrawerLayout();
-
-        this.configureNavigationView();
-
-        //Open CONNEXION
         buttonLogIn = (ImageButton)hView.findViewById(R.id.imageLogIn);
 
         buttonLogIn.setOnClickListener(new View.OnClickListener() {
@@ -72,39 +88,87 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        //Open HOME
-        buttonHome = (TextView)findViewById(R.id.activity_main_drawer_home);
 
-        buttonHome.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
 
 
 
 
     }
+    protected void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+        this.gridViewEvents.setAdapter(null);
+        popularGridView();
 
+        //popularGridView();
+    }
+
+    protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        Log.i("DIM", "onSaveInstanceState");
+        outState.putString("8INF257", "Yo, voici mon save");
+        outState.putParcelableArrayList("eventList", eventsList);
+
+    }
+
+    public void onCreateDrawer(){
+        this.configureToolBar();
+
+        this.configureDrawerLayout();
+
+        this.configureNavigationView();
+
+
+    }
 
     private void popularGridView(){
-        gridViewEvents = (GridView) findViewById(R.id.gridViewEvents);
-         for(int i=0; i < 10; i++){
-            events.add(new Events("Event "+i, R.drawable.uqac));
-        }
-        adapter = new EventsAdapter(this, events);
-         gridViewEvents.setAdapter(adapter);
+       // this.gridViewEvents.setAdapter(null);
+        Log.i("ETATGRID", "1");
+       this.gridViewEvents = (GridView) findViewById(R.id.gridViewEvents);
+       // this.listView = (ListView) findViewById(R.id.listView);
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
+        databaseAccess.open();
+        eventsList = databaseAccess.getEvents();
+        databaseAccess.close();
+
+        // ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, eventsList);
+        adapter = new EventsAdapter(this, eventsList);
+
+        this.gridViewEvents.setAdapter(adapter);
+
+
+//        gridViewEvents = (GridView) findViewById(R.id.gridViewEvents);
+//         for(int i=0; i < 10; i++){
+//            eventsList.add(new Events("Event "+i, R.drawable.uqac));
+//        }
+//        adapter = new EventsAdapter(this, eventsList);
+//         gridViewEvents.setAdapter(adapter);
 
         gridViewEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(MainActivity.this, Pop.class ));
+                //String name = eventsList.get;
+                String idEvent = eventsList.get(position).id;
+                String image = String.valueOf(eventsList.get(position).image);
+                String title = eventsList.get(position).title;
+                String description = eventsList.get(position).description;
+                //Log.i("ok", ok);
+//                Pop.(MainActivity.this, idEvent, image, title, description);
+
+//                textTitle = (TextView)findViewById(R.class.);
+//                textTitle.setText(title);
+                startActivity(new Intent(MainActivity.this, Pop.class));
+                Pop.EXTRA_EVENT_TITLE = title;
+                Pop.EXTRA_EVENT_IMAGE = image;
+                Pop.EXTRA_EVENT_ID = idEvent;
+                Pop.EXTRA_EVENT_DESCRIPTION = description;
+
                 //Toast.makeText(MainActivity.this, "Event" + position, Toast.LENGTH_SHORT).show();
             }
         });
 
     }
+
+    //le bouton qui permet d ouvrir ou pas la le drawer
     @Override
     public void onBackPressed() {
         // 5 - Handle back click to close menu
@@ -132,6 +196,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.activity_main_drawer_home:
                 Toast.makeText(this, "Accueil", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent);
                 break;
 
             case R.id.activity_main_drawer_liens:

@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="176dip"
-    android:background="@color/colorUQAC"
-    android:gravity="center"
+    android:layout_height="140dip"
     android:layout_marginTop="15dp"
+    android:background="@color/colorUQAC"
+    android:gravity="bottom|center"
     android:orientation="vertical">
 
 
     <ImageButton
         android:id="@+id/imageLogIn"
-        android:layout_width="159dp"
+        android:layout_width="181dp"
         android:layout_height="131dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
+        android:clickable="true"
         android:contentDescription="TODO"
         android:cropToPadding="true"
-        android:scaleType="fitCenter"
         android:pointerIcon="none"
-        android:clickable="true"
+        android:scaleType="fitCenter"
 
-        app:srcCompat="@drawable/ic_stat_name" />
+        app:srcCompat="@drawable/user" />
 
 </LinearLayout>
