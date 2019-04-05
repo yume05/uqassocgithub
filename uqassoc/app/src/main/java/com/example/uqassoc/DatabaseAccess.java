@@ -68,7 +68,7 @@ public class DatabaseAccess {
         Cursor cursor = database.rawQuery("SELECT * FROM events", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            Log.d("ok", cursor.getString(0));
+            Log.d("Event ", cursor.getString(0));
             eventList.add(new Events(cursor.getString(0), cursor.getString(1), R.drawable.uqac, cursor.getString(3)));
             cursor.moveToNext();
         }
@@ -85,10 +85,10 @@ public class DatabaseAccess {
      */
     public Boolean connect(String login, String password) {
         List<String> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT * FROM associations WHERE login = "+login+" AND password = "+password+";", null);
-        cursor.moveToFirst();
+        Cursor cursor = database.rawQuery("SELECT * FROM user WHERE login LIKE \""+login+"\" AND password LIKE \""+password+"\";", null);
+        //cursor.moveToFirst();
         Boolean resultat;
-        if(cursor.getCount() > 0){
+        if(!cursor.moveToFirst()){
             resultat = true;
         }else{
             resultat = false;
