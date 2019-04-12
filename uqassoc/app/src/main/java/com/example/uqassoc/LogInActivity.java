@@ -59,7 +59,6 @@ public class LogInActivity extends MainActivity {
             public void onClick(View v) {
                 login_edit = (EditText) findViewById(R.id.login_edit);
                 password_edit = (EditText) findViewById(R.id.password_edit);
-                Log.d("truc", "ok");
                 String login = login_edit.getText().toString();
                 String password = password_edit.getText().toString();
                 if (login.equals("root") && password.equals("ini01")) {

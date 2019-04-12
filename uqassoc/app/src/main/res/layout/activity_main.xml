@@ -95,6 +95,7 @@
                         android:layout_weight="1"
                         android:backgroundTintMode="add"
                         android:text="OTHER" />
+
                     <Button
                         android:id="@+id/buttonGestion"
                         android:layout_width="wrap_content"
@@ -107,13 +108,19 @@
 
         </LinearLayout>
 
+        <ListView
+            android:id="@+id/listEvents"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+
         <GridView
             android:id="@+id/gridViewEvents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"
             android:numColumns="1"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
     </LinearLayout>
 

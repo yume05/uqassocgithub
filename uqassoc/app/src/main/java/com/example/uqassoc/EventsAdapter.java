@@ -50,7 +50,9 @@ public class EventsAdapter extends BaseAdapter{
 
     public View getView(int position, View convertView, ViewGroup parent) {
        View itemView = convertView;
-       itemView = (itemView == null) ? inflater.inflate(R.layout.grid_item, null): itemView;
+       if(itemView == null){
+           itemView = inflater.inflate(R.layout.grid_item, null);
+       }
 
         ImageView imageViewEventName = (ImageView) itemView.findViewById(R.id.imageViewEvent);
         TextView textViewEvent= (TextView) itemView.findViewById(R.id.textViewEvent);

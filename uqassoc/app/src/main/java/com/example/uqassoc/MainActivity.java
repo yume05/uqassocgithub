@@ -26,6 +26,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 
 
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,8 +52,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public ImageButton buttonLogOut;
     public Button buttonGestion;
     private GridView gridViewEvents = null;
+    private ListView listEvents = null;
     EventsAdapter adapter;
-    ArrayList<Events> eventsList = new ArrayList<Events>();
+    ArrayList<Events> eventsList;
 
     SharedPreferences pref;
     Intent intent;
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
-
+        this.listEvents = (ListView) findViewById(R.id.listEvents);
 
         //events
         popularGridView();
@@ -199,6 +201,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onSaveInstanceState(outState);
         Log.i("DIM", "onSaveInstanceState");
         outState.putString("8INF257", "Yo, voici mon save");
+
        // outState.putExtra("eventList", eventsList);
     }
 
@@ -208,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      */
     protected void onRestoreInstanceState(Bundle savedInstanceState){
         super.onRestoreInstanceState(savedInstanceState);
-       // this.gridViewEvents.setAdapter(null);
+       // cleanListEvents();
 
     }
 
@@ -225,26 +228,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    @Override
+    protected void onResume() {
+        // TODO Auto-generated method stub
+        super.onResume();
+        eventsList.clear();
+       // ArrayList<Events> eventsList = new ArrayList<Events>();
+        popularGridView();
+    }
+
+    /**
+     * Nettoie la list View des events
+     */
+   /*public void cleanListEvents(){
+        eventsList.clear();
+        this.listEvents.setAdapter(null);
+    }*/
     /**
      * On creer le Grid et on ajoute les events
      */
     private void popularGridView(){
+      // eventsList.clear();
 
-        eventsList.clear();
-    adapter = null;
-    gridViewEvents.data
-      // this.gridViewEvents.setAdapter(null);
-        this.gridViewEvents = (GridView) findViewById(R.id.gridViewEvents);
+        //cleanListEvents();
+        //eventsList.clear();
+       //this.listEvents.setAdapter(null);
+       // this.gridViewEvents = (GridView) findViewById(R.id.gridViewEvents);
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
         databaseAccess.open();
         eventsList = databaseAccess.getEvents();
         databaseAccess.close();
+        Log.d("ok", eventsList.toString());
         adapter = new EventsAdapter(this, eventsList);
+        this.listEvents.setAdapter(adapter);
+        //this.gridViewEvents.setAdapter(adapter);
 
-
-        this.gridViewEvents.setAdapter(adapter);
-
-        gridViewEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       /* gridViewEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //String name = eventsList.get;
@@ -260,7 +279,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Pop.EXTRA_EVENT_DESCRIPTION = description;
 
             }
-        });
+        });*/
 
 
     }

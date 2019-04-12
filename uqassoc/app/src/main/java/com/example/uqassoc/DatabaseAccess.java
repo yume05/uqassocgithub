@@ -96,4 +96,20 @@ public class DatabaseAccess {
         cursor.close();
         return resultat;
     }
+
+    /**
+     * Insert Events
+     * @param title
+     * @param description
+     */
+    public void insertEvents(String title, String description) {
+        String sql = "INSERT INTO events(title,description) VALUES(?,?)";
+
+            pstmt.setString(1, name);
+            pstmt.setDouble(2, capacity);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
