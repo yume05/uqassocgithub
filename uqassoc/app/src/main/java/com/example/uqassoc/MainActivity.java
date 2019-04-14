@@ -122,22 +122,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             });
         }
-//        this.listView = (ListView) findViewById(R.id.listView);
-//        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
-//        databaseAccess.open();
-//        eventsList = databaseAccess.getEvents();
-//        databaseAccess.close();
-//
-//       // ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, eventsList);
-//        adapter = new EventsAdapter(this, eventsList);
-//        this.listView.setAdapter(adapter);
-        // 6 - Configure all views
 
 
-//
-        //Open CONNEXION
-        //Bouton Log in
-
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
+        databaseAccess.open();
+        databaseAccess.select("SELECT \n" +
+                "    name\n" +
+                "FROM \n" +
+                "    sqlite_master \n" +
+                "WHERE \n" +
+                "    type ='table' AND \n" +
+                "    name NOT LIKE 'sqlite_%';");
+        databaseAccess.close();
 
     }
 
@@ -248,12 +244,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      * On creer le Grid et on ajoute les events
      */
     private void popularGridView(){
-      // eventsList.clear();
 
-        //cleanListEvents();
-        //eventsList.clear();
-       //this.listEvents.setAdapter(null);
-       // this.gridViewEvents = (GridView) findViewById(R.id.gridViewEvents);
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
         databaseAccess.open();
         eventsList = databaseAccess.getEvents();
@@ -261,26 +252,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.d("ok", eventsList.toString());
         adapter = new EventsAdapter(this, eventsList);
         this.listEvents.setAdapter(adapter);
-        //this.gridViewEvents.setAdapter(adapter);
-
-       /* gridViewEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //String name = eventsList.get;
-                String idEvent = eventsList.get(position).id;
-                String image = String.valueOf(eventsList.get(position).image);
-                String title = eventsList.get(position).title;
-                String description = eventsList.get(position).description;
-
-                startActivity(new Intent(MainActivity.this, Pop.class));
-                Pop.EXTRA_EVENT_TITLE = title;
-                Pop.EXTRA_EVENT_IMAGE = image;
-                Pop.EXTRA_EVENT_ID = idEvent;
-                Pop.EXTRA_EVENT_DESCRIPTION = description;
-
-            }
-        });*/
-
 
     }
 
@@ -309,22 +280,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-//    public boolean onPrepareOptionsMenu(Menu menu)
-//    {
-//        MenuItem admin = menu.findItem(R.id.activity_main_drawer_admin);
-//        pref = getSharedPreferences("user_details",MODE_PRIVATE);
-//
-//        if(pref.contains("username") && pref.contains("password")) {
-//            // menuInflater.inflate(R.menu.activity_main_menu_drawer,  );
-//            if (pref.getString("user_details", "username") == "admin") {
-//                admin.setVisible(true);
-//            } else {
-//                admin.setVisible(false);
-//            }
-//        }
-//        return true;
-//    }
-
     /**
      * Menu de navigation du drawer
      * @param item
@@ -350,12 +305,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
                 break;
 
-//            case R.id.activity_main_drawer_admin:
-//                Toast.makeText(this, "Admin", Toast.LENGTH_SHORT).show();
-//
-//                Intent intent1 = new Intent(MainActivity.this, AdminGestion.class);
-//                startActivity(intent1);
-//                break;
             case R.id.activity_main_drawer_liens:
                 Toast.makeText(this, "Liens", Toast.LENGTH_SHORT).show();
                 break;

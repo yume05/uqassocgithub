@@ -1,7 +1,6 @@
 package com.example.uqassoc;
 
 import android.content.Context;
-import android.util.EventLog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +50,7 @@ public class EventsAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
        View itemView = convertView;
        if(itemView == null){
-           itemView = inflater.inflate(R.layout.grid_item, null);
+           itemView = inflater.inflate(R.layout.event_item, null);
        }
 
         ImageView imageViewEventName = (ImageView) itemView.findViewById(R.id.imageViewEvent);

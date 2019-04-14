@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.uqassoc.models.Events;
+import com.example.uqassoc.models.Users;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,9 @@ public class DatabaseAccess {
     EventsAdapter adapter;
     private Context context;
     ArrayList<Events> eventList = new ArrayList<Events>();
+    ArrayList<Users> userList = new ArrayList<Users>();
+
+
     /**
      * Private constructor to aboid object creation from outside classes.
      *
@@ -61,7 +65,7 @@ public class DatabaseAccess {
     /**
      * Read all quotes from the database.
      *
-     * @return a List of quotes
+     * @return a List of events
      */
     public ArrayList<Events> getEvents() {
         List<String> list = new ArrayList<>();
@@ -77,6 +81,45 @@ public class DatabaseAccess {
         cursor.close();
         return eventList;
     }
+
+    /**
+     * Read all quotes from the database.
+     *
+     * @return a List of events
+     */
+    public void select(String query) {
+        List<String> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery(query, null);
+        cursor.moveToFirst();
+        Log.d("QUERY :", query);
+        while (!cursor.isAfterLast()) {
+            Log.d("Field ", cursor.getString(0));
+            cursor.moveToNext();
+        }
+        // eventList.add(new Events("event", R.drawable.uqac));
+        // adapter = new EventsAdapter(context, eventList);
+        cursor.close();
+    }
+
+    /**
+     * Read all quotes from the database.
+     *
+     * @return a List of users
+     */
+    public ArrayList<Users> getUsers() {
+        Cursor cursor = database.rawQuery("SELECT login FROM user", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Log.d("User  ", cursor.getString(0));
+            userList.add(new Users(cursor.getString(0)));
+            cursor.moveToNext();
+        }
+        // eventList.add(new Events("event", R.drawable.uqac));
+        // adapter = new EventsAdapter(context, eventList);
+        cursor.close();
+        return userList;
+    }
+
 
     /**
      * Read all quotes from the database.
@@ -105,11 +148,6 @@ public class DatabaseAccess {
     public void insertEvents(String title, String description) {
         String sql = "INSERT INTO events(title,description) VALUES(?,?)";
 
-            pstmt.setString(1, name);
-            pstmt.setDouble(2, capacity);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+
     }
 }
