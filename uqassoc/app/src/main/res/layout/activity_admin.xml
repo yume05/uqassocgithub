@@ -17,7 +17,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="visible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -25,7 +26,8 @@
                 android:layout_marginTop="60dp"
                 android:background="@color/colorUQAC"
                 android:gravity="center|clip_vertical|center_horizontal|center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="visible">
 
                 <HorizontalScrollView
                     android:layout_width="match_parent"
@@ -69,160 +71,220 @@
             </LinearLayout>
 
             <ScrollView
-                android:id="@+id/linearUser"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fillViewport="true"
-                android:visibility="visible">
-
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:visibility="visible">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
 
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp"
-                        android:text="AJOUT D'UN USER"
-                        android:textAlignment="center"
-                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:id="@+id/textView1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp"
-                        android:text="LISTE USERS"
-                        android:textAlignment="center"
-                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                        android:textSize="24sp" />
-
-                    <ListView
-                        android:id="@+id/listUsers"
+                    <LinearLayout
+                        android:id="@+id/linearUser"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scrollbars="vertical" />
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
-                </LinearLayout>
-            </ScrollView>
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="AJOUT D'UN USER"
+                            android:textAlignment="center"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textSize="24sp" />
 
-            <ScrollView
-                android:id="@+id/linearAssoc"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone">
+                        <TextView
+                            android:id="@+id/textView1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="50dp"
+                            android:text="LISTE USERS"
+                            android:textAlignment="center"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textSize="24sp" />
 
+                        <ListView
+                            android:id="@+id/listUsers"
+                            android:layout_width="match_parent"
+                            android:layout_height="528dp"
+                            android:scrollbars="vertical" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="visible">
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@id/textView"
+                    <LinearLayout
+                        android:id="@+id/linearAssoc"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp"
-                        android:text="AJOUT D'UNE ASSOC"
-                        android:textAlignment="center"
-                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                        android:textSize="24sp" />
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
-                </LinearLayout>
-            </ScrollView>
+                        <TextView
+                            android:id="@id/textView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="AJOUT D'UNE ASSOC"
+                            android:textAlignment="center"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textSize="24sp" />
 
-            <ScrollView
-                android:id="@+id/linearEvent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone">
+                        <TextView
+                            android:id="@+id/textView12"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="50dp"
+                            android:text="LISTE ASSOC"
+                            android:textAlignment="center"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textSize="24sp" />
 
+                        <ListView
+                            android:id="@+id/listAssoc"
+                            android:layout_width="match_parent"
+                            android:layout_height="528dp"
+                            android:scrollbars="vertical" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="visible">
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/textView"
+                    <LinearLayout
+                        android:id="@+id/linearEvent"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp"
-                        android:text="AJOUT D'UN EVENT"
-                        android:textAlignment="center"
-                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                        android:textSize="24sp" />
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
-                    <EditText
-                        android:id="@+id/editTitleEvent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="Titre..." />
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="AJOUT D'UN EVENT"
+                            android:textAlignment="center"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textSize="24sp" />
 
-                    <EditText
-                        android:id="@+id/editDescriptionEvent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="Description" />
+                        <EditText
+                            android:id="@+id/editTitleEvent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="Saisir le titre.."
+                            android:inputType="textPersonName"
+                            android:text="" />
 
-                    <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Date début" />
+                        <EditText
+                            android:id="@+id/editDescriptionEvent"
+                            android:layout_width="match_parent"
+                            android:layout_height="97dp"
+                            android:ems="10"
+                            android:hint="Saisir \nune \ndescription..."
+                            android:inputType="textMultiLine"
+                            android:maxLines="5"
+                            android:text=""
+                            android:textAlignment="textStart" />
 
-                    <EditText
-                        android:id="@+id/editText3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="date" />
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Date début" />
 
-                    <TextView
-                        android:id="@+id/textView5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Date fin" />
+                        <EditText
+                            android:id="@+id/editDateDebut"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="Saisir date début..." />
 
-                    <EditText
-                        android:id="@+id/editText4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="date" />
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Date fin" />
 
-                    <Button
-                        android:id="@+id/buttonAddEvent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Ajout de l'evenement" />
+                        <EditText
+                            android:id="@+id/editDateFin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="Saisir date fin..." />
 
-                    <TextView
-                        android:id="@+id/textView8"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp"
-                        android:text="LISTE EVENTS"
-                        android:textAlignment="center"
-                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                        android:textSize="24sp" />
+                        <TextView
+                            android:id="@+id/textView7"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Catégorie" />
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <RadioButton
+                                android:id="@+id/radioButtonAssoc"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:onClick="onRadioButtonClicked"
+                                android:text="Association" />
+
+                            <RadioButton
+                                android:id="@+id/radioButtonAutre"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:onClick="onRadioButtonClicked"
+                                android:text="Autres" />
+
+                            <RadioButton
+                                android:id="@+id/radioButtonAdmin"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked="true"
+                                android:onClick="onRadioButtonClicked"
+                                android:text="Administration" />
+
+                            <RadioButton
+                                android:id="@+id/radioButtonLoisir"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:onClick="onRadioButtonClicked"
+                                android:text="Loisir" />
+
+                        </RadioGroup>
+
+                        <Button
+                            android:id="@+id/buttonAddEvent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Ajout de l'evenement" />
+
+                        <TextView
+                            android:id="@+id/textView8"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="50dp"
+                            android:text="LISTE EVENTS"
+                            android:textAlignment="center"
+                            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                            android:textSize="24sp" />
+
+                    </LinearLayout>
 
                     <ListView
                         android:id="@+id/listEvents"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scrollbars="vertical" />
+                        android:layout_height="528dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:scrollbars="none" />
+
                 </LinearLayout>
             </ScrollView>
 
@@ -237,6 +299,7 @@
             android:visibility="visible">
 
             <!-- Toolbar -->
+
             <include layout="@layout/activity_main_toolbar" />
 
             <FrameLayout

@@ -42,11 +42,14 @@ public class LogInActivity extends MainActivity {
         super.onCreateDrawer();
         //super.gestionLogIn();
 
-        pref = getSharedPreferences("user_details", MODE_PRIVATE);
+
         intent = new Intent(LogInActivity.this, MainActivity.class);
 
         navigationView = (NavigationView) findViewById(R.id.activity_main_nav_view);
         View hView =  navigationView.getHeaderView(0);
+
+        pref = getSharedPreferences("user_details", MODE_PRIVATE);
+
         buttonLogIn = (ImageButton)hView.findViewById(R.id.imageLogIn);
         buttonLogOut = (ImageButton)hView.findViewById(R.id.imageLogOut);
         //super.gestionLogIn();

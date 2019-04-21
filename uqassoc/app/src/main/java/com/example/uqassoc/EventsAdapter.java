@@ -1,6 +1,7 @@
 package com.example.uqassoc;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,49 @@ public class EventsAdapter extends BaseAdapter{
     // 3
 
     public long getItemId(int position) {
+        Events selectedEvent = events.get(position);
+
         return position;
+    }
+
+    public String getTitle(int position) {
+        Events selectedEvent = events.get(position);
+        String title = selectedEvent.title;
+        if(title == ""){
+            title = "";
+        }
+        return title;
+    }
+    public String getDescription(int position) {
+        Events selectedEvent = events.get(position);
+        String description = selectedEvent.description;
+        if(description == ""){
+         //   Log.i("description vide", "OK");
+            description = "";
+        }
+       // Log.i("Description", description);
+        return description;
+    }
+
+    public String getDateDebut(int position) {
+        Events selectedEvent = events.get(position);
+        String dateDebut = selectedEvent.dateDebut;
+       // Log.i("date debut", dateDebut);
+        return dateDebut;
+    }
+
+    public String getDateFin(int position) {
+        Events selectedEvent = events.get(position);
+        String dateFin = selectedEvent.dateFin;
+      //  Log.i("date debut", dateFin);
+        return dateFin;
+    }
+
+    public int getImage(int position) {
+        Events selectedEvent = events.get(position);
+        int image = selectedEvent.image;
+        Log.i("image popup", image+"");
+        return image;
     }
 
     // 4
@@ -55,13 +98,12 @@ public class EventsAdapter extends BaseAdapter{
 
         ImageView imageViewEventName = (ImageView) itemView.findViewById(R.id.imageViewEvent);
         TextView textViewEvent= (TextView) itemView.findViewById(R.id.textViewEvent);
-        TextView idViewEvent= (TextView) itemView.findViewById(R.id.idViewEvent);
+
 
         Events selectedEvent = events.get(position);
 
         imageViewEventName.setImageResource(selectedEvent.image);
         textViewEvent.setText(selectedEvent.title);
-        idViewEvent.setText(selectedEvent.id);
 
         return itemView;
     }

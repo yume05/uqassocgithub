@@ -11,7 +11,7 @@
 
     <TextView
         android:id="@+id/loginUser"
-        android:layout_width="302dp"
+        android:layout_width="586dp"
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="ok"
@@ -22,7 +22,7 @@
 
     <Button
         android:id="@+id/buttonDeleteUser"
-        android:layout_width="wrap_content"
+        android:layout_width="98dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"

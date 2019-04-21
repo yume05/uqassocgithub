@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,6 +29,7 @@ import android.widget.ImageButton;
 
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,11 +53,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public ImageButton buttonLogOut;
     public Button buttonGestion;
+    public Button buttonHome;
+    public Button buttonAll;
+    public Button buttonToday;
+    public Button buttonOther;
+
+    public LinearLayout linearHome;
     private GridView gridViewEvents = null;
     private ListView listEvents = null;
     EventsAdapter adapter;
     ArrayList<Events> eventsList;
 
+    private View popupEvent;
     SharedPreferences pref;
     Intent intent;
 
@@ -68,8 +77,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
         this.listEvents = (ListView) findViewById(R.id.listEvents);
 
-        //events
+        //layout home affichage en premier
+        linearHome = (LinearLayout)findViewById(R.id.linearHome);
+        linearHome.setVisibility(View.VISIBLE);
+
+
         popularGridView();
+
 
         onCreateDrawer();
        // gestionLogIn();
@@ -78,16 +92,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         buttonLogIn = (ImageButton)hView.findViewById(R.id.imageLogIn);
         buttonLogOut = (ImageButton)hView.findViewById(R.id.imageLogOut);
-        buttonGestion = (Button)findViewById(R.id.buttonGestion);
 
+
+        /**
+         * Si connecté et avec les droits alors on peut afficher
+         * le bouton GESTION et la deconnexion
+         */
+        buttonGestion = (Button)findViewById(R.id.buttonGestion);
         pref = getSharedPreferences("user_details",MODE_PRIVATE);
 
         if(pref.contains("username") && pref.contains("password")){
 
             String result = pref.getString("username", "");
-            Log.i("ok", result);
+            //Log.i("ok", result);
             if (result.equals("root")) {
-                Log.i("ok", "Ok cest egal");
+              //  Log.i("ok", "Ok cest egal");
+                /**
+                 * Si je clique sur le bouton de gestion
+                 */
                 buttonGestion.setVisibility(View.VISIBLE);
                 buttonGestion.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -95,11 +117,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         Toast.makeText(MainActivity.this, "Admin", Toast.LENGTH_SHORT).show();
                         Intent intent1 = new Intent(MainActivity.this, AdminGestion.class);
                         startActivity(intent1);
-
                     }
                 });
             } else {
-                Log.i("ok", "Ok cest pas egal");
+              //  Log.i("ok", "Ok cest pas egal");
                 buttonGestion.setVisibility(View.INVISIBLE);
             }
 
@@ -123,21 +144,52 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
         }
 
+        /**
+         * Si je clique sur le bouton de home
+         */
+        buttonHome = (Button)findViewById(R.id.buttonHome);
+        buttonHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linearHome.setVisibility(View.VISIBLE);
+                listEvents.setVisibility(View.GONE);
+            }
+        });
 
+        /**
+         * Si je clique sur le bouton de All
+         */
+        buttonAll = (Button)findViewById(R.id.buttonAll);
+        buttonAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //events
+                listEvents.setVisibility(View.VISIBLE);
+                linearHome.setVisibility(View.GONE);
+            }
+        });
+        /**
+         * Quelques tests pour verifier si on a bien tout ce quil nous faut dans le bdd
+         */
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
         databaseAccess.open();
-        databaseAccess.select("SELECT \n" +
+        /*databaseAccess.select("SELECT \n" +
                 "    name\n" +
                 "FROM \n" +
                 "    sqlite_master \n" +
                 "WHERE \n" +
                 "    type ='table' AND \n" +
-                "    name NOT LIKE 'sqlite_%';");
+                "    name NOT LIKE 'sqlite_%';");*/
+        databaseAccess.select("SELECT * FROM events;");
         databaseAccess.close();
 
     }
 
 
+    /**
+     * Si connecté et avec les droits alors on peut afficher
+     * le bouton GESTION et la deconnexion
+     */
     public void gestionLogIn(){
         navigationView = (NavigationView) findViewById(R.id.activity_main_nav_view);
         View hView =  navigationView.getHeaderView(0);
@@ -151,9 +203,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(pref.contains("username") && pref.contains("password")){
 
             String result = pref.getString("username", "");
-            Log.i("ok", result);
+           // Log.i("ok", result);
             if (result.equals("root")) {
-                Log.i("ok", "Ok cest egal");
+              //  Log.i("ok", "Ok cest egal");
                 buttonGestion.setVisibility(View.VISIBLE);
                 buttonGestion.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -165,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
             } else {
-                Log.i("ok", "Ok cest pas egal");
+               // Log.i("ok", "Ok cest pas egal");
                 buttonGestion.setVisibility(View.INVISIBLE);
             }
 
@@ -195,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      */
     protected void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
-        Log.i("DIM", "onSaveInstanceState");
+      //  Log.i("DIM", "onSaveInstanceState");
         outState.putString("8INF257", "Yo, voici mon save");
 
        // outState.putExtra("eventList", eventsList);
@@ -234,24 +286,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     /**
-     * Nettoie la list View des events
-     */
-   /*public void cleanListEvents(){
-        eventsList.clear();
-        this.listEvents.setAdapter(null);
-    }*/
-    /**
      * On creer le Grid et on ajoute les events
      */
     private void popularGridView(){
-
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
         databaseAccess.open();
         eventsList = databaseAccess.getEvents();
         databaseAccess.close();
-        Log.d("ok", eventsList.toString());
+        //Log.d("ok", eventsList.toString());
         adapter = new EventsAdapter(this, eventsList);
         this.listEvents.setAdapter(adapter);
+
+        listEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent popup = new Intent(getApplicationContext(), Pop.class);
+                popup.putExtra("EXTRA_EVENT_TITLE", adapter.getTitle(position));
+                popup.putExtra("EXTRA_EVENT_DESCRIPTION", adapter.getDescription(position));
+                popup.putExtra("EXTRA_EVENT_DATED", adapter.getDateDebut(position));
+                popup.putExtra("EXTRA_EVENT_DATEF", adapter.getDateFin(position));
+                popup.putExtra("EXTRA_EVENT_IMAGE", adapter.getImage(position));
+                startActivity(popup);
+            }
+        });
+
 
     }
 
@@ -288,7 +346,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-
 
         switch (id){
 

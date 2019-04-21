@@ -50,7 +50,14 @@
                         android:backgroundTintMode="add"
                         android:text="HOME"
                         android:textSize="25sp" />
-
+                    <Button
+                        android:id="@+id/buttonAll"
+                        android:layout_width="121dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:backgroundTintMode="add"
+                        android:text="ALL"
+                        android:textSize="25sp" />
                     <Button
                         android:id="@+id/buttonAfter"
                         android:layout_width="121dp"
@@ -67,7 +74,7 @@
                         android:layout_weight="1"
                         android:backgroundTintMode="add"
                         android:text="TODAY"
-                        android:textSize="30sp" />
+                        android:textSize="25sp" />
 
                     <Button
 
@@ -76,20 +83,12 @@
                         android:layout_width="121dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-
                         android:backgroundTintMode="add"
                         android:text="THIS WEEK"
                         android:textColor="@android:color/black"
                         android:textSize="25sp" />
 
-                    <Button
-                        android:id="@+id/buttonAll"
-                        android:layout_width="121dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:backgroundTintMode="add"
-                        android:text="ALL"
-                        android:textSize="25sp" />
+
 
                     <Button
                         android:id="@+id/buttonOther"
@@ -99,16 +98,35 @@
                         android:backgroundTintMode="add"
                         android:text="OTHER"
                         android:textSize="25sp" />
+
                     <Button
                         android:id="@+id/buttonGestion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:backgroundTintMode="add"
-                        android:text="GESTION" />
+                        android:text="GESTION"
+                        android:textSize="25sp"/>
                 </LinearLayout>
             </HorizontalScrollView>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearHome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="BIENVENUE"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"
+                android:textSize="24sp" />
         </LinearLayout>
 
 
@@ -116,7 +134,8 @@
             android:id="@+id/listEvents"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"
+            android:visibility="gone" />
 
         <GridView
             android:id="@+id/gridViewEvents"
