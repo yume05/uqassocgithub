@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 "WHERE \n" +
                 "    type ='table' AND \n" +
                 "    name NOT LIKE 'sqlite_%';");*/
-        databaseAccess.select("SELECT * FROM events;");
+        databaseAccess.select("SELECT login, password FROM user  WHERE login = 'root' AND password = 'ini01';");
         databaseAccess.close();
 
     }

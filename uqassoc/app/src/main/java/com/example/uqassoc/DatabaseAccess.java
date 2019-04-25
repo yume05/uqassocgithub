@@ -3,10 +3,12 @@ package com.example.uqassoc;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import com.facebook.CallbackManager;
 
 import com.example.uqassoc.models.Assoc;
 import com.example.uqassoc.models.Events;
@@ -20,6 +22,7 @@ public class DatabaseAccess {
     private SQLiteDatabase database;
     private static DatabaseAccess instance;
     EventsAdapter adapter;
+
     private Context context;
     ArrayList<Events> eventList = new ArrayList<Events>();
     ArrayList<Users> userList = new ArrayList<Users>();
@@ -34,6 +37,7 @@ public class DatabaseAccess {
     private DatabaseAccess(Context context) {
         context = context;
         this.openHelper = new DatabaseOpenHelper(context);
+
     }
 
     /**
@@ -87,9 +91,9 @@ public class DatabaseAccess {
             }else{
                 dateFin = cursor.getString(4);
             }
-            Log.d("Event date ", dateFin);
+            //Log.d("Event date ", dateFin);
             int image = cursor.getInt(3);
-            Log.i("image", image+"");
+           // Log.i("image", image+"");
             //switch){
 
             if(image ==1 ) {
@@ -129,8 +133,8 @@ public class DatabaseAccess {
         cursor.moveToFirst();
         Log.d("QUERY :", query);
         while (!cursor.isAfterLast()) {
-            Log.d("Field id ", cursor.getString(0));
-            Log.d("Field title", cursor.getString(1));
+            Log.d("Field 1 ", cursor.getString(0));
+            Log.d("Field 2", cursor.getString(1));
             cursor.moveToNext();
         }
         // eventList.add(new Events("event", R.drawable.uqac));
@@ -182,16 +186,36 @@ public class DatabaseAccess {
      *
      * @return a List of quotes
      */
-    public Boolean connect(String login, String password) {
+    public Boolean getConnect(String query) {
         List<String> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT * FROM user WHERE login LIKE \""+login+"\" AND password LIKE \""+password+"\";", null);
-        //cursor.moveToFirst();
-        Boolean resultat;
-        if(!cursor.moveToFirst()){
-            resultat = true;
-        }else{
-            resultat = false;
+        Cursor cursor = database.rawQuery(query, null);
+       // while (!cursor.isAfterLast()) {
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            //    Log.d("User  ", cursor.getString(0));
+            Log.d("connect", cursor.getString(0));
+            cursor.moveToNext();
         }
+        // eventList.add(new Events("event", R.drawable.uqac));
+        // adapter = new EventsAdapter(context, eventList);
+        cursor.close();
+        return true;
+    }
+    public boolean selectLogin(String query) {
+        List<String> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery(query, null);
+        cursor.moveToFirst();
+        boolean resultat = false;
+        Log.d("QUERY :", query);
+        while (!cursor.isAfterLast()) {
+            Log.d("Field 1 ", cursor.getString(0));
+            Log.d("Field 2", cursor.getString(1));
+            resultat = true;
+            cursor.moveToNext();
+            //resultat = cursor.getString(0);
+        }
+        // eventList.add(new Events("event", R.drawable.uqac));
+        // adapter = new EventsAdapter(context, eventList);
         cursor.close();
         return resultat;
     }
