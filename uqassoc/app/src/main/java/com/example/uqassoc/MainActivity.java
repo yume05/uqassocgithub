@@ -104,9 +104,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(pref.contains("username") && pref.contains("password")){
 
             String result = pref.getString("username", "");
-            //Log.i("ok", result);
             if (result.equals("root")) {
-              //  Log.i("ok", "Ok cest egal");
                 /**
                  * Si je clique sur le bouton de gestion
                  */
@@ -120,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
             } else {
-              //  Log.i("ok", "Ok cest pas egal");
                 buttonGestion.setVisibility(View.INVISIBLE);
             }
 
@@ -173,13 +170,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          */
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
         databaseAccess.open();
-        /*databaseAccess.select("SELECT \n" +
-                "    name\n" +
-                "FROM \n" +
-                "    sqlite_master \n" +
-                "WHERE \n" +
-                "    type ='table' AND \n" +
-                "    name NOT LIKE 'sqlite_%';");*/
         databaseAccess.select("SELECT login, password FROM user  WHERE login = 'root' AND password = 'ini01';");
         databaseAccess.close();
 
@@ -248,7 +238,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
       //  Log.i("DIM", "onSaveInstanceState");
-        outState.putString("8INF257", "Yo, voici mon save");
+        outState.putString("8INF257", "Voici mon save");
 
        // outState.putExtra("eventList", eventsList);
     }

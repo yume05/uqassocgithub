@@ -41,7 +41,6 @@ public class LogInActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connexion);
         super.onCreateDrawer();
-        //super.gestionLogIn();
 
 
         intent = new Intent(LogInActivity.this, MainActivity.class);
@@ -53,7 +52,6 @@ public class LogInActivity extends MainActivity {
 
         buttonLogIn = (ImageButton)hView.findViewById(R.id.imageLogIn);
         buttonLogOut = (ImageButton)hView.findViewById(R.id.imageLogOut);
-        //super.gestionLogIn();
         buttonLogIn.setVisibility(View.VISIBLE);
         buttonLogOut.setVisibility(View.INVISIBLE);
 
@@ -65,16 +63,9 @@ public class LogInActivity extends MainActivity {
                 password_edit = (EditText) findViewById(R.id.password_edit);
                 String login = login_edit.getText().toString();
                  String password = password_edit.getText().toString();
-        /*databaseAccess.select("SELECT \n" +
-                "    name\n" +
-                "FROM \n" +
-                "    sqlite_master \n" +
-                "WHERE \n" +
-                "    type ='table' AND \n" +
-                "    name NOT LIKE 'sqlite_%';");*/
                 DatabaseAccess databaseAccess = DatabaseAccess.getInstance(LogInActivity.this);
                 databaseAccess.open();
-                boolean resultat = databaseAccess.selectLogin("SELECT login, password FROM user  WHERE login = '"+login+"' AND password = '"+password+"';");
+                boolean resultat = databaseAccess.selectLogin("SELECT login, password FROM user WHERE login = '"+login+"' AND password = '"+password+"';");
                 databaseAccess.close();
                 if (resultat) {
                     SharedPreferences.Editor editor = pref.edit();
@@ -84,36 +75,10 @@ public class LogInActivity extends MainActivity {
                     Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                 } else {
+                    login_edit.setText("");
+                    password_edit.setText("");
                     Toast.makeText(getApplicationContext(), "Credentials are not valid", Toast.LENGTH_SHORT).show();
                 }
-                //login_edit = (EditText) findViewById(R.id.login_edit);
-                //password_edit = (EditText) findViewById(R.id.password_edit);
-                //String login = login_edit.getText().toString();
-               // String password = password_edit.getText().toString();
-
-               // Log.i("Connect", list.toString());
-               /* if(list.size() > 0){
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putString("username", list.get(1));
-                    editor.putString("password", list.get(2));
-                    editor.putString("priority", list.get(3));
-                    editor.commit();
-                    Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-                    startActivity(intent);
-                }else{
-                    Toast.makeText(getApplicationContext(), "Credentials are not valid", Toast.LENGTH_SHORT).show();
-                }*/
-                /*if (login.equals("root") && password.equals("ini01")) {
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putString("username", login);
-                    editor.putString("password", password);
-                    editor.commit();
-                    Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Credentials are not valid", Toast.LENGTH_SHORT).show();
-                }*/
-
             }
         });
 

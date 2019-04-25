@@ -178,9 +178,9 @@
                         <EditText
                             android:id="@+id/editDescriptionEvent"
                             android:layout_width="match_parent"
-                            android:layout_height="97dp"
+                            android:layout_height="wrap_content"
                             android:ems="10"
-                            android:hint="Saisir \nune \ndescription..."
+                            android:hint="Saisir une description... (max 5 lignes)"
                             android:inputType="textMultiLine"
                             android:maxLines="5"
                             android:text=""

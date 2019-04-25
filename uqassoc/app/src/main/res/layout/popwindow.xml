@@ -39,6 +39,7 @@
                     android:id="@+id/titlePopup"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="fill_vertical"
                     android:autoSizeMaxTextSize="100sp"
                     android:autoSizeMinTextSize="12sp"
                     android:gravity="center_horizontal|center_vertical"
@@ -78,8 +79,9 @@
             <TextView
                 android:id="@+id/textView15"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="58dp"
                 android:layout_weight="1"
+                android:gravity="fill_vertical"
                 android:text="Description"
                 android:textAlignment="center"
                 android:textAllCaps="true"

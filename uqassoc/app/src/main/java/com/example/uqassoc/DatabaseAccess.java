@@ -76,7 +76,7 @@ public class DatabaseAccess {
      */
     public ArrayList<Events> getEvents() {
         List<String> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT * FROM events", null);
+        Cursor cursor = database.rawQuery("SELECT * FROM events ORDER BY dateDebut ASC", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             String dateDebut;
@@ -181,26 +181,7 @@ public class DatabaseAccess {
     }
 
 
-    /**
-     * Read all quotes from the database.
-     *
-     * @return a List of quotes
-     */
-    public Boolean getConnect(String query) {
-        List<String> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery(query, null);
-       // while (!cursor.isAfterLast()) {
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            //    Log.d("User  ", cursor.getString(0));
-            Log.d("connect", cursor.getString(0));
-            cursor.moveToNext();
-        }
-        // eventList.add(new Events("event", R.drawable.uqac));
-        // adapter = new EventsAdapter(context, eventList);
-        cursor.close();
-        return true;
-    }
+
     public boolean selectLogin(String query) {
         List<String> list = new ArrayList<>();
         Cursor cursor = database.rawQuery(query, null);
